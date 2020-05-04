@@ -1,12 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
@@ -20,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 //所有的UI设计都在这个.java文件中，其他类都将是功能类
 
@@ -32,7 +25,7 @@ public class Main
             public void run()									//载入框架
             {
                 mainFrame frame=new mainFrame();//主框架
-                frame.setTitle("灵动快传");//设置标题
+                frame.setTitle("LightingShare");//设置标题
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
             }
@@ -48,7 +41,7 @@ class mainFrame extends JFrame//主框架类
     private JFileChooser fc = new JFileChooser();//定义文件选择对象
     private final Dimension BUTTONSIZE = new Dimension(90,50);
     private final Dimension PANELSIZE = new Dimension(260,320);
-    public static String pathdir = "c:\\download";//接收文件路径
+    public static String pathdir = "D:\\downloads";//接收文件路径
 
     //主界面
     private MyPanel cardPanel=new MyPanel();//定义使用卡片布局的容器
@@ -95,6 +88,10 @@ class mainFrame extends JFrame//主框架类
 
     public mainFrame()
     {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) { e.printStackTrace();
+        }
         //主界面设计
         setSize(width,height);
         setLocationByPlatform(true);
@@ -113,9 +110,9 @@ class mainFrame extends JFrame//主框架类
         Recent.setFocusable(false);//按键聚焦设置
         Recent.setPreferredSize(BUTTONSIZE);
 
-        ctrlPanel.setBackground(new Color(14,232,58));
+        ctrlPanel.setBackground(new Color(130, 174, 217));
         ctrlPanel.add(Phone);
-        ctrlPanel.add(Online);
+//        ctrlPanel.add(Online);//砍了
         ctrlPanel.add(Custom);
         ctrlPanel.add(Recent);
         ctrlPanel.setLayout(new  FlowLayout(FlowLayout.CENTER,20,18));
@@ -483,7 +480,7 @@ class mainFrame extends JFrame//主框架类
 //路径管理类
 class pathmanager
 {
-    static File f = new File("c:\\path.txt");
+    static File f = new File("D:\\path.txt");
     static FileOutputStream out;
     static byte b[];
     public pathmanager() throws IOException
@@ -505,7 +502,7 @@ class pathmanager
     }
     public String getpath() throws IOException//读取路径
     {
-        File file = new File("c:\\path.txt");
+        File file = new File("D:\\path.txt");
         FileReader reader = new FileReader(file);
         int fileLen = (int)file.length();
         char[] chars = new char[fileLen];
@@ -560,6 +557,7 @@ class MyPanel extends JPanel
         g2.fillRect(0, 0, w, h);
     }
 }
+
 
 class MyButton extends JButton
 {
