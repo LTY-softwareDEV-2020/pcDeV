@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 //所有的UI设计都在这个.java文件中，其他类都将是功能类
 
@@ -370,8 +369,10 @@ class mainFrame extends JFrame//主框架类
                 Msg.setText("正在连接中...");
                 UdpReceive udpreceive = new UdpReceive();
                 udpreceive.start();
-                tcpControler tcpControler = new tcpControler();
-                tcpControler.start();
+                tcpkeyBoardControler tcpkeyBoardControler = new tcpkeyBoardControler();
+                tcpkeyBoardControler.start();
+                tcpMouseControler tcpMouseControler = new tcpMouseControler();
+                tcpMouseControler.start();
             }
             else if(event.getSource() == Send1)
             {

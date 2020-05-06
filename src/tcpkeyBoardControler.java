@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class tcpControler extends Thread{
+public class tcpkeyBoardControler extends Thread{
     Robot robot;
     Map keyMap;
-    public tcpControler(){
+    public tcpkeyBoardControler(){
         keyMap = new HashMap<>() {
             {
                 put("01esc", new int[]{KeyEvent.VK_ESCAPE});
@@ -36,16 +36,14 @@ public class tcpControler extends Thread{
             e.printStackTrace();
         }
     }
-
     @Override
     public void run(){
         ServerSocket server = null;
-
         try {
             server = new ServerSocket(1234);
             while (true){
                 Socket socket = server.accept();//等待连接，一直阻塞
-                System.out.println("有链接传入");
+                System.out.println("keyboardConnected");
                 DataInputStream dis = new DataInputStream(socket.getInputStream());
                 String control = dis.readUTF();
                 System.out.println(control);
@@ -79,6 +77,5 @@ public class tcpControler extends Thread{
         catch (IOException e) {
                 e.printStackTrace();
             }
-
     }
 }
