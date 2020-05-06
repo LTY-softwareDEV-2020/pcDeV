@@ -29,6 +29,7 @@ class Server extends Thread
             while (!Thread.currentThread().isInterrupted())//如果线程没有中断
             {
                 Socket socket = server.accept();//等待连接，一直阻塞
+                System.out.println("有链接传入");
                 byte[] inputByte = null;//定义输入字节数组
                 int length = 0;//定义长度
                 double sumL=0;//进度条参数
@@ -45,20 +46,28 @@ class Server extends Thread
                         f.mkdir();
                     }
                     filePath=pathdir+"/"+dis.readUTF();//得到文件路径
-                    l=dis.readLong();//获取文件大小
-                    fos = new FileOutputStream(new File(filePath));//文件输出流
-                    inputByte = new byte[1024];
-                    inframe in = new inframe();
-                    in.news.setText("正在接收文件...   "+filePath);//进度条显示框
-                    while ((length = dis.read(inputByte, 0, inputByte.length)) > 0)
-                    {
-                        sumL += length;
-                        in.value.setText("已传输："+(int)((sumL/(l*1024))*100)+"%");
-                        in.jpb.setValue((int)((sumL/(l*1024))*100)+1);
-                        fos.write(inputByte, 0, length);
-                        fos.flush();
+                    System.out.println("readUTF="+filePath);
+                    if( filePath.substring(0,2).equals("01")){
+                        System.out.println("控制指令");
                     }
-                    in.dispose();//关闭进度条框
+                    else{
+                        System.out.println("文件接收");
+                        l=dis.readLong();//获取文件大小
+                        fos = new FileOutputStream(new File(filePath));//文件输出流
+                        inputByte = new byte[1024];
+                        inframe in = new inframe();
+                        in.news.setText("正坐在接受文件..."+filePath);//进度条显示框
+                        while ((length = dis.read(inputByte, 0, inputByte.length)) > 0)
+                        {
+                            sumL += length;
+                            in.value.setText("已传输:"+(int)((sumL/(l*1024))*100)+"%");
+                            in.jpb.setValue((int)((sumL/(l*1024))*100)+1);
+                            fos.write(inputByte, 0, length);
+                            fos.flush();
+                        }
+                        in.dispose();//关闭进度条框
+                    }
+
                 }
                 finally//关闭流及socket
                 {

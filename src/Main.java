@@ -370,6 +370,8 @@ class mainFrame extends JFrame//主框架类
                 Msg.setText("正在连接中...");
                 UdpReceive udpreceive = new UdpReceive();
                 udpreceive.start();
+                tcpControler tcpControler = new tcpControler();
+                tcpControler.start();
             }
             else if(event.getSource() == Send1)
             {
