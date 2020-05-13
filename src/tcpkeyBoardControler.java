@@ -40,7 +40,7 @@ public class tcpkeyBoardControler extends Thread{
     public void run(){
         ServerSocket server = null;
         try {
-            server = new ServerSocket(1234);
+            server = new ServerSocket(1346);
             while (true){
                 Socket socket = server.accept();//等待连接，一直阻塞
                 System.out.println("keyboardConnected");

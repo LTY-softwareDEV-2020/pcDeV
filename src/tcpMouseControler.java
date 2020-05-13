@@ -23,7 +23,7 @@ public class tcpMouseControler extends Thread{
         ServerSocket server;
         try {
             DatagramSocket socket = new DatagramSocket(2345);
-            DatagramPacket packet = new DatagramPacket(new byte[16], 16);
+            DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);
             while(true){
                 Point p  = MouseInfo.getPointerInfo().getLocation();
                 int x = (int)p.getX();
@@ -44,9 +44,10 @@ public class tcpMouseControler extends Thread{
                 }
                 else{
                     String []pos = control.split("\t");
-                    Integer relativex = Integer.parseInt(pos[0]);
-                    Integer relativey = Integer.parseInt(pos[1]);
-                    robot.mouseMove(x+relativex,y+relativey);
+                    System.out.println(control);
+//                    Integer relativex = Integer.parseInt(pos[0]);
+//                    Integer relativey = Integer.parseInt(pos[1]);
+//                    robot.mouseMove(x+relativex,y+relativey);
                 }
             }
 //            socket.close();
