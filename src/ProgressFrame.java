@@ -20,7 +20,7 @@ class inframe extends JFrame
 
         setLocation(Width/2-250,Height/2-80);//框架定位
         setSize(500,160);
-        setTitle("正在接收");
+        setTitle("Downloading  ");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setResizable(false);//不允许改变框架大小
         setVisible(true);
@@ -53,7 +53,7 @@ class outframe extends JFrame
 
         setLocation(Width/2-250,Height/2-80);//框架定位
         setSize(500,160);
-        setTitle("正在发送");
+        setTitle("Uploading");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setResizable(false);//不允许改变框架大小
         setVisible(true);

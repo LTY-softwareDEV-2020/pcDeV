@@ -56,11 +56,11 @@ class Server extends Thread
                         fos = new FileOutputStream(new File(filePath));//文件输出流
                         inputByte = new byte[1024];
                         inframe in = new inframe();
-                        in.news.setText("正坐在接受文件..."+filePath);//进度条显示框
+                        in.news.setText("Downloading..."+filePath);//进度条显示框
                         while ((length = dis.read(inputByte, 0, inputByte.length)) > 0)
                         {
                             sumL += length;
-                            in.value.setText("已传输:"+(int)((sumL/(l*1024))*100)+"%");
+                            in.value.setText(""+(int)((sumL/(l*1024))*100)+"%");
                             in.jpb.setValue((int)((sumL/(l*1024))*100)+1);
                             fos.write(inputByte, 0, length);
                             fos.flush();
@@ -135,11 +135,11 @@ class Client implements Runnable
                 dos.writeLong((long)file.length()/1024+1);
                 dos.flush();
 
-                out.news.setText("正在发送文件...   "+filePath);
+                out.news.setText("Uploading...   "+filePath);
                 while ((length = fis.read(sendBytes, 0, sendBytes.length)) > 0)
                 {
                     sumL += length;
-                    out.value.setText("已传输："+(int)((sumL/l)*100)+"%");
+                    out.value.setText(""+(int)((sumL/l)*100)+"%");
                     out.jpb.setValue((int)((sumL/l)*100));
                     dos.write(sendBytes, 0, length);
                     dos.flush();
@@ -148,7 +148,7 @@ class Client implements Runnable
             }
             catch (Exception e)
             {
-                out.news.setText("客户端文件传输异常");
+                out.news.setText("Error");
                 e.printStackTrace();
             }
             finally

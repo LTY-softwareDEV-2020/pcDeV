@@ -20,6 +20,10 @@ public class tcpMouseControler extends Thread{
     }
     @Override
     public void run(){
+        Boolean debugFlag = false;
+        if(debugFlag){
+            return;
+        }
         ServerSocket server;
         try {
             DatagramSocket socket = new DatagramSocket(2345);
@@ -45,9 +49,9 @@ public class tcpMouseControler extends Thread{
                 else{
                     String []pos = control.split("\t");
                     System.out.println(control);
-//                    Integer relativex = Integer.parseInt(pos[0]);
-//                    Integer relativey = Integer.parseInt(pos[1]);
-//                    robot.mouseMove(x+relativex,y+relativey);
+                    Integer relativex = Integer.parseInt(pos[0]);
+                    Integer relativey = Integer.parseInt(pos[1]);
+                    robot.mouseMove(x+relativex,y+relativey);
                 }
             }
 //            socket.close();
